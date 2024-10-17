@@ -10,9 +10,9 @@ class DBUtility(object):
 
 
     def create_connection(self):
-        connection = pymysql.connect(host=self.host, user=self.credentials['db_user'],
-                                     password=self.credentials['db_password'],
-                                     unix_socket=self.credentials['db_socket'])
+        connection = pymysql.connect(host=self.host, user=self.credentials.get('DB_USER'),
+                                     password=self.credentials.get('DB_PASSWORD'),
+                                     unix_socket=self.credentials.get('DB_SOCKET'))
 
         return connection
 
@@ -29,7 +29,5 @@ class DBUtility(object):
         finally:
             connection.close()
 
+        print("")
         return results_dict
-
-    def execute_sql(self, sql):
-        pass
