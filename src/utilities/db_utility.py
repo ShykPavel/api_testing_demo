@@ -1,4 +1,5 @@
 import pymysql.cursors
+import logging as logger
 from src.utilities.credentialsUtility import CredentialsUtility
 
 class DBUtility(object):
@@ -20,6 +21,7 @@ class DBUtility(object):
         connection = self.create_connection()
 
         try:
+            logger.debug(f"Executing {sql}")
             cursor = connection.cursor(pymysql.cursors.DictCursor)
             cursor.execute(sql)
             results_dict =  cursor.fetchall()
@@ -29,5 +31,4 @@ class DBUtility(object):
         finally:
             connection.close()
 
-        print("")
         return results_dict
