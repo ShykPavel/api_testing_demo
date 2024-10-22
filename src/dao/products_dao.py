@@ -20,3 +20,28 @@ class ProductsDAO(object):
 
         return random.sample(response_sql, int(qty))
 
+
+    def get_product_by_id_from_db(self, product_id):
+        sql = f"SELECT * FROM local.wp_posts WHERE ID = {product_id}"
+        response_sql = self.db_helper.execute_select(sql)
+
+        return response_sql
+
+    def get_product_metadata_from_db_by_key(self, product_id, metadata_key=None):
+        sql = f"SELECT * FROM local.wp_postmeta where post_id = {product_id}"
+        response_sql = self.db_helper.execute_select(sql)
+
+        if metadata_key:
+            for key in response_sql:
+                if key["meta_key"] == metadata_key:
+                    return key
+        else:
+            return response_sql
+
+
+    def get_products_after_given_gate(self, date_iso):
+
+        sql = f"SELECT * FROM local.wp_posts WHERE post_type = 'product' AND post_date > '{date_iso}' LIMIT 5000;"
+        response_sql = self.db_helper.execute_select(sql)
+
+        return response_sql

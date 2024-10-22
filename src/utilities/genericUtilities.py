@@ -22,3 +22,9 @@ def generate_random_email_and_username(domain=None, email_prefix=None):
     logger.debug(f"Random email and username: {random_info}")
 
     return random_info
+
+def generate_random_string(length=10):
+    random_string = "".join(random.choices(string.ascii_lowercase, k=length))
+    return random_string
+
+
