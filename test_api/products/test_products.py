@@ -1,11 +1,7 @@
 from datetime import datetime, timedelta
 from random import randint
-
 import pytest
-import logging as logger
 
-from src.dao.products_dao import ProductsDAO
-from src.utilities.genericUtilities import generate_random_email_and_username
 from src.helpers.customer_creation_helpers import CustomerCreationHelper
 from src.helpers.products_helpers import ProductsHelper
 from src.utilities.genericUtilities import generate_random_string
